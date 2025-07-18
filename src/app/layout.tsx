@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import DotPattern from '../components/DotPattern'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -54,8 +55,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
-        <div data-scroll-container>
-          {children}
+        <div className="relative min-h-screen">
+          {/* Dotted Background Pattern */}
+          <DotPattern 
+            className="absolute inset-0 h-full w-full opacity-30"
+            width={20}
+            height={20}
+            cx={1}
+            cy={1}
+            cr={1}
+          />
+          
+          <div data-scroll-container className="relative z-10">
+            {children}
+          </div>
         </div>
       </body>
     </html>

@@ -1,17 +1,19 @@
+"use client";
+
 import React from "react";
 import { cn } from "../lib/utils";
 
 interface DotPatternProps {
-  width?: any;
-  height?: any;
-  x?: any;
-  y?: any;
-  cx?: any;
-  cy?: any;
-  cr?: any;
+  width?: number;
+  height?: number;
+  x?: number;
+  y?: number;
+  cx?: number;
+  cy?: number;
+  cr?: number;
   className?: string;
   glow?: boolean;
-  fadeInOut?: boolean;
+  [key: string]: any;
 }
 
 export function DotPattern({
@@ -24,18 +26,15 @@ export function DotPattern({
   cr = 1,
   className,
   glow = false,
-  fadeInOut = false,
   ...props
 }: DotPatternProps) {
-  const id = React.useId();
+  const id = Math.random().toString(36).substr(2, 9);
 
   return (
     <svg
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-0 h-full w-full fill-neutral-400/40",
-        glow && "fill-blue-400/20",
-        fadeInOut && "animate-pulse",
+        "pointer-events-none absolute inset-0 h-full w-full fill-neutral-400/20",
         className,
       )}
       {...props}
@@ -56,26 +55,24 @@ export function DotPattern({
             cy={cy}
             r={cr}
             fill="currentColor"
-            className={glow ? "drop-shadow-[0_0_8px_rgba(59,130,246,0.6)]" : ""}
           />
         </pattern>
-        {glow && (
-          <filter id={`glow-${id}`}>
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge> 
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        )}
       </defs>
       <rect
         width="100%"
         height="100%"
         strokeWidth={0}
         fill={`url(#${id})`}
-        filter={glow ? `url(#glow-${id})` : undefined}
       />
+      {glow && (
+        <rect
+          width="100%"
+          height="100%"
+          strokeWidth={0}
+          fill={`url(#${id})`}
+          className="animate-pulse fill-blue-400/20"
+        />
+      )}
     </svg>
   );
 }

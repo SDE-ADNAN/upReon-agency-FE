@@ -56,9 +56,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
         <div className="relative min-h-screen">
-          {/* Dotted Background Pattern */}
+          {/* Magic UI Dotted Background Pattern with Glow */}
           <DotPattern 
-            className="absolute inset-0 h-full w-full opacity-30"
+            glow={true}
+            className="opacity-60 [mask-image:radial-gradient(800px_circle_at_center,white,transparent)]"
             width={20}
             height={20}
             cx={1}

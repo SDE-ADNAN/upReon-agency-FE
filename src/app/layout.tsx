@@ -47,6 +47,10 @@ export const metadata: Metadata = {
   },
 }
 
+function cn(...classes: (string | undefined | null | false)[]): string {
+  return classes.filter(Boolean).join(' ');
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -55,16 +59,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
-        <div className="relative min-h-screen">
-          {/* Magic UI Dotted Background Pattern with Glow */}
-          <DotPattern 
+        <div className="relative min-h-screen overflow-hidden">
+          {/* Magic UI DotPattern with Glow Effect */}
+          <DotPattern
             glow={true}
-            className="opacity-60 [mask-image:radial-gradient(800px_circle_at_center,white,transparent)]"
             width={20}
             height={20}
-            cx={1}
-            cy={1}
-            cr={1}
+            className={cn(
+              "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]",
+              "opacity-50"
+            )}
           />
           
           <div data-scroll-container className="relative z-10">

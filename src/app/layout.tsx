@@ -60,8 +60,8 @@ export default function RootLayout({
           <DotPatternWithGlowEffect 
             wrapperClassName="fixed inset-0"
             glow={true}
-            orbSize={6}
-            orbCount={40}
+            // orbSize={6}
+            // orbCount={40}
             className="[mask-image:radial-gradient(1200px_circle_at_center,white,transparent)]"
           />
           

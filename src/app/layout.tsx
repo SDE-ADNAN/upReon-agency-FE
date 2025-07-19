@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { DotPatternWithGlowEffect } from '@/components/DotPatternWithGlowEffect'
+import { DotPatternWithGlowEffect } from '../components/DotPatternWithGlowEffect'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +17,8 @@ export const metadata: Metadata = {
     description: 'We help companies build exceptional digital products with our global network of talented developers, designers, and product experts.',
     url: 'https://agency.com',
     siteName: 'Agency',
+    locale: 'en_US',
+    type: 'website',
     images: [
       {
         url: '/og-image.jpg',
@@ -25,8 +27,6 @@ export const metadata: Metadata = {
         alt: 'Agency - Build Great Products',
       },
     ],
-    locale: 'en_US',
-    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
@@ -47,10 +47,6 @@ export const metadata: Metadata = {
   },
 }
 
-function cn(...classes: (string | undefined | null | false)[]): string {
-  return classes.filter(Boolean).join(' ');
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -60,7 +56,15 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
         <div className="relative min-h-screen overflow-hidden">
-          <DotPatternWithGlowEffect wrapperClassName="fixed" />
+          {/* 3D Orb Background Pattern */}
+          <DotPatternWithGlowEffect 
+            wrapperClassName="fixed inset-0"
+            glow={true}
+            orbSize={6}
+            orbCount={40}
+            className="[mask-image:radial-gradient(1200px_circle_at_center,white,transparent)]"
+          />
+          
           <div data-scroll-container className="relative z-10">
             {children}
           </div>

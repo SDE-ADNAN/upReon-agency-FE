@@ -6,7 +6,7 @@ import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black" data-scroll-container>
+    <div className="min-h-screen" data-scroll-container>
       <Header />
       <Hero />
       <Services />

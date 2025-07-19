@@ -30,32 +30,81 @@ const Hero = () => {
         {/* Subtle gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-transparent to-purple-500/3"></div>
         
-        {/* Enhanced Floating Elements with Glassmorphic Effect */}
+        {/* 3D Orbs instead of flat gradient circles */}
         <motion.div
-          className="absolute top-1/3 left-1/5 w-80 h-80 rounded-full backdrop-blur-3xl bg-gradient-to-br from-blue-500/8 to-purple-500/8 border border-white/5"
+          className="absolute top-1/3 left-1/5 w-80 h-80 rounded-full border border-white/10"
+          style={{
+            background: `radial-gradient(circle at 25% 25%, 
+              rgba(255, 255, 255, 0.2), 
+              rgba(147, 197, 253, 0.15) 30%, 
+              rgba(59, 130, 246, 0.1) 60%, 
+              rgba(29, 78, 216, 0.05) 100%)`,
+            boxShadow: `
+              0 0 60px rgba(59, 130, 246, 0.3),
+              0 0 120px rgba(147, 197, 253, 0.15),
+              inset 0 0 40px rgba(255, 255, 255, 0.1),
+              inset -20px -20px 80px rgba(59, 130, 246, 0.1)
+            `,
+            backdropFilter: 'blur(40px)',
+            transform: 'perspective(1000px) rotateX(10deg) rotateY(-10deg)',
+          }}
           animate={{
             x: mousePosition.x * 25,
             y: mousePosition.y * 25,
-            rotate: mousePosition.x * 5,
+            rotateX: 10 + mousePosition.y * 5,
+            rotateY: -10 + mousePosition.x * 5,
           }}
           transition={{ type: "spring", stiffness: 80, damping: 40 }}
         />
         <motion.div
-          className="absolute bottom-1/3 right-1/5 w-64 h-64 rounded-full backdrop-blur-3xl bg-gradient-to-br from-purple-500/8 to-blue-500/8 border border-white/5"
+          className="absolute bottom-1/3 right-1/5 w-64 h-64 rounded-full border border-white/10"
+          style={{
+            background: `radial-gradient(circle at 30% 30%, 
+              rgba(255, 255, 255, 0.25), 
+              rgba(168, 85, 247, 0.2) 30%, 
+              rgba(147, 51, 234, 0.15) 60%, 
+              rgba(88, 28, 135, 0.08) 100%)`,
+            boxShadow: `
+              0 0 50px rgba(147, 51, 234, 0.4),
+              0 0 100px rgba(168, 85, 247, 0.2),
+              inset 0 0 30px rgba(255, 255, 255, 0.15),
+              inset -15px -15px 60px rgba(147, 51, 234, 0.12)
+            `,
+            backdropFilter: 'blur(35px)',
+            transform: 'perspective(1000px) rotateX(-8deg) rotateY(12deg)',
+          }}
           animate={{
             x: mousePosition.x * -15,
             y: mousePosition.y * -15,
-            rotate: mousePosition.x * -3,
+            rotateX: -8 + mousePosition.y * -3,
+            rotateY: 12 + mousePosition.x * -4,
           }}
           transition={{ type: "spring", stiffness: 80, damping: 40 }}
         />
         
-        {/* Additional subtle elements */}
+        {/* Smaller 3D orb */}
         <motion.div
-          className="absolute top-1/2 right-1/3 w-32 h-32 rounded-full backdrop-blur-2xl bg-white/3 border border-white/10"
+          className="absolute top-1/2 right-1/3 w-32 h-32 rounded-full border border-white/15"
+          style={{
+            background: `radial-gradient(circle at 35% 25%, 
+              rgba(255, 255, 255, 0.4), 
+              rgba(99, 102, 241, 0.3) 25%, 
+              rgba(67, 56, 202, 0.2) 50%, 
+              rgba(49, 46, 129, 0.1) 100%)`,
+            boxShadow: `
+              0 0 30px rgba(99, 102, 241, 0.5),
+              0 0 60px rgba(129, 140, 248, 0.25),
+              inset 0 0 20px rgba(255, 255, 255, 0.2),
+              inset -10px -10px 40px rgba(99, 102, 241, 0.15)
+            `,
+            backdropFilter: 'blur(25px)',
+            transform: 'perspective(800px) rotateX(5deg) rotateY(8deg)',
+          }}
           animate={{
             x: mousePosition.x * 10,
             y: mousePosition.y * 20,
+            rotateX: 5 + mousePosition.y * 3,
+            rotateY: 8 + mousePosition.x * 6,
           }}
           transition={{ type: "spring", stiffness: 120, damping: 50 }}
         />
@@ -126,19 +175,6 @@ const Hero = () => {
                 <ArrowRight className="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform duration-200" />
               </span>
             </Link>
-          </motion.div>
-
-          {/* Enhanced Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
-          >
-            <div className="flex flex-col items-center space-y-3 backdrop-blur-sm bg-white/5 px-4 py-6 rounded-full border border-white/10">
-              <span className="text-white/60 text-xs uppercase tracking-wider font-medium">Scroll</span>
-              <div className="w-px h-8 bg-gradient-to-b from-white/60 to-transparent animate-pulse"></div>
-            </div>
           </motion.div>
         </motion.div>
       </div>

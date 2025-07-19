@@ -6,6 +6,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { motion } from 'framer-motion'
 import { ExternalLink, Github, ArrowUpRight } from 'lucide-react'
+import { DotPatternWithGlowEffect } from '@/components/DotPatternWithGlowEffect'
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState('all')
@@ -91,11 +92,10 @@ const Portfolio = () => {
     : projects.filter(project => project.category === activeFilter)
 
   return (
-    <div className="min-h-screen bg-black" data-scroll-container>
+    <div className="min-h-screen" data-scroll-container>
       <Header />
-      
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-black" data-scroll-section>
+      <section className="pt-32 pb-20" data-scroll-section>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -145,7 +145,7 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-20" data-scroll-section>
+      <section className="py-20 backdrop-blur-[2px]" data-scroll-section>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {filteredProjects.map((project, index) => (

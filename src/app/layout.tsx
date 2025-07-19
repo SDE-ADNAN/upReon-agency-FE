@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import DotPattern from '../components/DotPattern'
+import { DotPatternWithGlowEffect } from '@/components/DotPatternWithGlowEffect'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -60,17 +60,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
         <div className="relative min-h-screen overflow-hidden">
-          {/* Magic UI DotPattern with Glow Effect */}
-          <DotPattern
-            glow={true}
-            width={20}
-            height={20}
-            className={cn(
-              "[mask-image:radial-gradient(600px_circle_at_center,white,transparent)]",
-              "opacity-50"
-            )}
-          />
-          
+          <DotPatternWithGlowEffect wrapperClassName="fixed" />
           <div data-scroll-container className="relative z-10">
             {children}
           </div>

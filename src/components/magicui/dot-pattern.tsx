@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "../lib/utils";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import React, { useEffect, useId, useRef, useState } from "react";
 
@@ -17,7 +17,7 @@ import React, { useEffect, useId, useRef, useState } from "react";
  * @param {string} [className] - Additional CSS classes to apply to the SVG container
  * @param {boolean} [glow=false] - Whether dots should have a glowing animation effect
  */
-interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
+export interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
   width?: number;
   height?: number;
   x?: number;
@@ -145,7 +145,7 @@ export function DotPattern({
               ? {
                   duration: dot.duration,
                   repeat: Infinity,
-                  repeatType: "mirror",
+                  repeatType: "reverse",
                   delay: dot.delay,
                   ease: "easeInOut",
                 }
@@ -156,5 +156,3 @@ export function DotPattern({
     </svg>
   );
 }
-
-export default DotPattern; 

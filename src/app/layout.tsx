@@ -1,38 +1,70 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import './globals.css'
-import { DotPatternWithGlowEffect } from '../components/DotPatternWithGlowEffect'
+import { ThemeProvider } from '@/components/providers/theme-provider'
+import { Toaster } from '@/components/ui/toaster'
+import { Analytics } from '@/components/analytics'
 
-const inter = Inter({ subsets: ['latin'] })
+// Font configurations
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains-mono',
+  display: 'swap',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'Agency - Build Great Products with Global Tech Teams',
-  description: 'We help companies build exceptional digital products with our global network of talented developers, designers, and product experts.',
-  keywords: 'agency, development, design, tech teams, digital products, web development, mobile apps',
-  authors: [{ name: 'Agency Team' }],
-  creator: 'Agency',
-  publisher: 'Agency',
+  title: {
+    default: 'upReon - Premium Digital Agency',
+    template: '%s | upReon'
+  },
+  description: 'upReon delivers cutting-edge digital solutions, web development, mobile apps, and UI/UX design. Transform your digital presence with our expert team.',
+  keywords: [
+    'digital agency',
+    'web development',
+    'mobile app development',
+    'UI/UX design',
+    'React',
+    'Next.js',
+    'TypeScript',
+    'upReon'
+  ],
+  authors: [{ name: 'upReon Team' }],
+  creator: 'upReon',
+  publisher: 'upReon',
   openGraph: {
-    title: 'Agency - Build Great Products with Global Tech Teams',
-    description: 'We help companies build exceptional digital products with our global network of talented developers, designers, and product experts.',
-    url: 'https://agency.com',
-    siteName: 'Agency',
-    locale: 'en_US',
     type: 'website',
+    locale: 'en_US',
+    url: 'https://upreon.com',
+    title: 'upReon - Premium Digital Agency',
+    description: 'Transform your digital presence with cutting-edge web development, mobile apps, and design solutions.',
+    siteName: 'upReon',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Agency - Build Great Products',
+        alt: 'upReon - Premium Digital Agency',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Agency - Build Great Products with Global Tech Teams',
-    description: 'We help companies build exceptional digital products with our global network of talented developers, designers, and product experts.',
-    images: ['/og-image.jpg'],
+    title: 'upReon - Premium Digital Agency',
+    description: 'Transform your digital presence with cutting-edge solutions.',
+    images: ['/og-image.png'],
+    creator: '@upreon',
   },
   robots: {
     index: true,
@@ -45,30 +77,93 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
+  verification: {
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+  },
 }
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} bg-black text-white`}>
-        <div className="relative min-h-screen overflow-hidden">
-          {/* 3D Orb Background Pattern */}
-          <DotPatternWithGlowEffect 
-            wrapperClassName="fixed inset-0"
-            glow={true}
-            // orbSize={6}
-            // orbCount={40}
-            className="[mask-image:radial-gradient(1200px_circle_at_center,white,transparent)]"
-          />
-          
-          <div data-scroll-container className="relative z-10">
-            {children}
+    <html 
+      lang="en" 
+      className={`${inter.variable} ${jetbrainsMono.variable} ${spaceGrotesk.variable}`}
+      suppressHydrationWarning
+    >
+      <head>
+        {/* Preload critical resources */}
+        <link
+          rel="preload"
+          href="/fonts/inter-var.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        
+        {/* Viewport meta */}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=5"
+        />
+        
+        {/* Theme color */}
+        <meta name="theme-color" content="#000000" />
+        
+        {/* Preconnect to external domains */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Security headers */}
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="DENY" />
+        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
+        
+        {/* DNS prefetch for performance */}
+        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+      </head>
+      
+      <body className="font-sans antialiased min-h-screen bg-black text-white overflow-x-hidden">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {/* Main content */}
+          <div className="relative flex min-h-screen flex-col">
+            <main className="flex-1">
+              {children}
+            </main>
           </div>
-        </div>
+          
+          {/* Toast notifications */}
+          <Toaster />
+          
+          {/* Analytics */}
+          <Analytics />
+          
+          {/* GSAP ScrollTrigger refresh on route change */}
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                if (typeof window !== 'undefined' && window.ScrollTrigger) {
+                  window.ScrollTrigger.refresh();
+                }
+              `,
+            }}
+          />
+        </ThemeProvider>
       </body>
     </html>
   )

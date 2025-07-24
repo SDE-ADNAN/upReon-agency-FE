@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/providers/theme-provider'
+import { GSAPProvider } from '@/components/providers/gsap-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { Analytics } from '@/components/analytics'
 
@@ -140,29 +141,31 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem={false}
           disableTransitionOnChange
         >
-          {/* Main content */}
-          <div className="relative flex min-h-screen flex-col">
-            <main className="flex-1">
-              {children}
-            </main>
-          </div>
-          
-          {/* Toast notifications */}
-          <Toaster />
-          
-          {/* Analytics */}
-          <Analytics />
-          
-          {/* GSAP ScrollTrigger refresh on route change */}
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                if (typeof window !== 'undefined' && window.ScrollTrigger) {
-                  window.ScrollTrigger.refresh();
-                }
-              `,
-            }}
-          />
+          <GSAPProvider>
+            {/* Main content */}
+            <div className="relative flex min-h-screen flex-col">
+              <main className="flex-1">
+                {children}
+              </main>
+            </div>
+            
+            {/* Toast notifications */}
+            <Toaster />
+            
+            {/* Analytics */}
+            <Analytics />
+            
+            {/* GSAP ScrollTrigger refresh on route change */}
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  if (typeof window !== 'undefined' && window.ScrollTrigger) {
+                    window.ScrollTrigger.refresh();
+                  }
+                `,
+              }}
+            />
+          </GSAPProvider>
         </ThemeProvider>
       </body>
     </html>

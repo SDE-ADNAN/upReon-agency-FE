@@ -1,160 +1,171 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
+import { heroAnimations } from '@/lib/gsap-utils'
+import { CircuitBackground, AnimatedLine } from '@/components/animations/animated-lines'
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
+  const heroRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
+  useEffect(() => {
+    if (mounted) {
+      heroAnimations.init()
+    }
+  }, [mounted])
+
   if (!mounted) return null
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section 
+      ref={heroRef}
+      id="hero" 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black" />
       <div className="absolute inset-0 bg-grid opacity-10" />
       
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-neon-green/5 rounded-full blur-3xl animate-float" />
-        <div className="absolute top-3/4 right-1/4 w-96 h-96 bg-neon-blue/5 rounded-full blur-3xl animate-float delay-1000" />
-        <div className="absolute bottom-1/4 left-1/3 w-80 h-80 bg-neon-pink/5 rounded-full blur-3xl animate-float delay-2000" />
+      {/* Circuit Background */}
+      <CircuitBackground />
+      
+      {/* Floating Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="floating-element absolute top-20 left-10 w-4 h-4 bg-neon-green/20 rounded-full" />
+        <div className="floating-element absolute top-40 right-20 w-6 h-6 bg-neon-blue/20 rounded-full" />
+        <div className="floating-element absolute bottom-40 left-20 w-3 h-3 bg-neon-pink/20 rounded-full" />
+        <div className="floating-element absolute bottom-20 right-10 w-5 h-5 bg-neon-green/20 rounded-full" />
+        <div className="floating-element absolute top-1/3 left-1/4 w-2 h-2 bg-neon-blue/30 rounded-full" />
+        <div className="floating-element absolute bottom-1/3 right-1/4 w-3 h-3 bg-neon-pink/25 rounded-full" />
       </div>
 
-      {/* Content Container */}
-      <div className="relative z-10 container-custom">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-screen py-20">
-          {/* Left Content */}
-          <div className="space-y-8 text-center lg:text-left">
-            {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-full text-sm font-medium text-gray-300 backdrop-blur-sm">
-              <div className="w-2 h-2 bg-neon-green rounded-full mr-2 animate-pulse" />
-              Premium Digital Solutions
-            </div>
-
-            {/* Main Headline */}
-            <div className="space-y-4">
-              <h1 className="text-responsive-xl font-display font-bold leading-tight">
-                We{' '}
-                <span className="relative inline-block">
-                  <span className="text-gradient">upHold</span>
-                  <div className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-neon opacity-30 blur-sm" />
-                </span>
-                <br />
-                Your Digital Vision
-              </h1>
-              
-              <p className="text-responsive-md text-gray-300 max-w-2xl leading-relaxed">
-                Crafting exceptional digital experiences through cutting-edge design and development. 
-                Transform your ideas into powerful, scalable solutions that drive results.
-              </p>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link href="/#contact" className="btn-primary group">
-                Start Your Project
-                <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
-              </Link>
-              
-              <Link href="/portfolio" className="btn-secondary group">
-                View Our Work
-                <span className="ml-2 transition-transform group-hover:translate-x-1">↗</span>
-              </Link>
-            </div>
-
-            {/* Stats */}
-            <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-8">
-              <div className="text-center lg:text-left">
-                <div className="text-2xl font-bold text-white">50+</div>
-                <div className="text-sm text-gray-400">Projects Delivered</div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="text-2xl font-bold text-white">98%</div>
-                <div className="text-sm text-gray-400">Client Satisfaction</div>
-              </div>
-              <div className="text-center lg:text-left">
-                <div className="text-2xl font-bold text-white">24/7</div>
-                <div className="text-sm text-gray-400">Support Available</div>
-              </div>
-            </div>
+      {/* Hero Content */}
+      <div className="container-custom relative z-10">
+        <div className="text-center max-w-6xl mx-auto">
+          
+          {/* Decorative Lines */}
+          <div className="flex justify-center mb-8">
+            <AnimatedLine 
+              direction="horizontal" 
+              length="medium" 
+              color="neon-green" 
+              thickness="thin"
+              delay={0.2}
+            />
           </div>
+          
+          {/* Main Title */}
+          <h1 className="hero-title text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-6">
+            <span className="block text-gradient">
+              Digital Excellence
+            </span>
+            <span className="block text-white mt-2">
+              Redefined
+            </span>
+          </h1>
 
-          {/* Right Content - Visual Element */}
-          <div className="relative flex items-center justify-center">
-            {/* Main Visual Container */}
-            <div className="relative w-full max-w-lg aspect-square">
-              {/* Floating Cards */}
-              <div className="absolute inset-0">
-                {/* Card 1 - Top */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-32 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 p-4 animate-float shadow-glow">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <div className="w-3 h-3 bg-neon-green rounded-full animate-pulse" />
-                    <div className="text-xs text-gray-400">Web Development</div>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="h-2 bg-gray-700 rounded w-3/4" />
-                    <div className="h-2 bg-gray-700 rounded w-1/2" />
-                  </div>
-                </div>
+          {/* Subtitle */}
+          <p className="hero-subtitle text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
+            We craft premium digital experiences that transform businesses 
+            and captivate audiences through cutting-edge technology and design innovation.
+          </p>
 
-                {/* Card 2 - Right */}
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 w-44 h-28 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 p-4 animate-float delay-500 shadow-glow">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <div className="w-3 h-3 bg-neon-blue rounded-full animate-pulse" />
-                    <div className="text-xs text-gray-400">UI/UX Design</div>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="h-2 bg-gray-700 rounded w-2/3" />
-                    <div className="h-2 bg-gray-700 rounded w-1/3" />
-                  </div>
-                </div>
-
-                {/* Card 3 - Bottom */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-52 h-36 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 p-4 animate-float delay-1000 shadow-glow">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <div className="w-3 h-3 bg-neon-pink rounded-full animate-pulse" />
-                    <div className="text-xs text-gray-400">Mobile Apps</div>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="h-2 bg-gray-700 rounded w-4/5" />
-                    <div className="h-2 bg-gray-700 rounded w-3/5" />
-                    <div className="h-2 bg-gray-700 rounded w-2/5" />
-                  </div>
-                </div>
-
-                {/* Card 4 - Left */}
-                <div className="absolute top-1/2 left-0 -translate-y-1/2 w-40 h-24 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 p-4 animate-float delay-1500 shadow-glow">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <div className="w-3 h-3 bg-neon-green rounded-full animate-pulse" />
-                    <div className="text-xs text-gray-400">DevOps</div>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="h-2 bg-gray-700 rounded w-3/4" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Central Element */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-neon rounded-full flex items-center justify-center shadow-neon animate-pulse">
-                <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-                  <span className="text-neon-green font-bold text-lg">uR</span>
-                </div>
-              </div>
-            </div>
+          {/* CTA Buttons */}
+          <div className="hero-cta flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+            <Link 
+              href="#contact" 
+              className="btn-primary group px-8 py-4 text-lg"
+            >
+              Start Your Project
+              <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+            
+            <Link 
+              href="#portfolio" 
+              className="btn-secondary group px-8 py-4 text-lg border border-gray-600 hover:border-neon-green/50 transition-all duration-300"
+            >
+              View Our Work
+              <span className="ml-2 transition-transform group-hover:translate-x-1">↗</span>
+            </Link>
+          </div>
+          
+          {/* Bottom Decorative Lines */}
+          <div className="flex justify-center space-x-8">
+            <AnimatedLine 
+              direction="horizontal" 
+              length="short" 
+              color="neon-blue" 
+              thickness="thin"
+              delay={1.5}
+            />
+            <AnimatedLine 
+              direction="horizontal" 
+              length="short" 
+              color="neon-pink" 
+              thickness="thin"
+              delay={1.7}
+            />
+            <AnimatedLine 
+              direction="horizontal" 
+              length="short" 
+              color="neon-green" 
+              thickness="thin"
+              delay={1.9}
+            />
           </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="flex flex-col items-center space-y-2 text-gray-400">
-          <span className="text-sm">Scroll to explore</span>
-          <div className="w-0.5 h-6 bg-gradient-to-b from-neon-green to-transparent" />
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-gray-500 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-neon-green rounded-full mt-2 animate-pulse" />
+        </div>
+      </div>
+
+      {/* Side Decorative Elements */}
+      <div className="absolute left-8 top-1/2 transform -translate-y-1/2 hidden lg:block">
+        <div className="space-y-4">
+          <AnimatedLine 
+            direction="vertical" 
+            length="short" 
+            color="neon-green" 
+            thickness="thin"
+            delay={2.2}
+          />
+          <div className="w-2 h-2 bg-neon-green/40 rounded-full" />
+          <AnimatedLine 
+            direction="vertical" 
+            length="short" 
+            color="neon-blue" 
+            thickness="thin"
+            delay={2.4}
+          />
+        </div>
+      </div>
+
+      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 hidden lg:block">
+        <div className="space-y-4">
+          <AnimatedLine 
+            direction="vertical" 
+            length="short" 
+            color="neon-pink" 
+            thickness="thin"
+            delay={2.6}
+          />
+          <div className="w-2 h-2 bg-neon-pink/40 rounded-full" />
+          <AnimatedLine 
+            direction="vertical" 
+            length="short" 
+            color="neon-green" 
+            thickness="thin"
+            delay={2.8}
+          />
         </div>
       </div>
     </section>

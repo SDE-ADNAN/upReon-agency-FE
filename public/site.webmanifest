@@ -1,0 +1,45 @@
+{
+  "name": "upReon - Premium Digital Agency",
+  "short_name": "upReon",
+  "description": "Transform your digital presence with cutting-edge web development, mobile apps, and design solutions.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ff88",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity", "technology"],
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16 32x32",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Build Dream Team",
+      "short_name": "Build Team",
+      "description": "Create your perfect development team",
+      "url": "/build-dream-team",
+      "icons": [
+        {
+          "src": "/favicon.ico",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Portfolio",
+      "short_name": "Portfolio",
+      "description": "View our latest projects",
+      "url": "/portfolio",
+      "icons": [
+        {
+          "src": "/favicon.ico",
+          "sizes": "32x32"
+        }
+      ]
+    }
+  ]
+} 

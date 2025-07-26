@@ -11,6 +11,7 @@ interface Service {
   description: string
   features: string[]
   color: 'neon-green' | 'neon-blue' | 'neon-pink'
+  available: boolean
 }
 
 export function ServicesSection() {
@@ -24,15 +25,8 @@ export function ServicesSection() {
       title: 'Web Development',
       description: 'Cutting-edge web applications built with modern technologies for optimal performance and scalability.',
       features: ['React & Next.js', 'TypeScript', 'API Integration', 'Performance Optimization'],
-      color: 'neon-green'
-    },
-    {
-      id: 'mobile-apps',
-      icon: '📱',
-      title: 'Mobile Applications',
-      description: 'Native and cross-platform mobile solutions that deliver exceptional user experiences across all devices.',
-      features: ['React Native', 'iOS & Android', 'App Store Deployment', 'Push Notifications'],
-      color: 'neon-blue'
+      color: 'neon-green',
+      available: true
     },
     {
       id: 'ui-ux',
@@ -40,7 +34,17 @@ export function ServicesSection() {
       title: 'UI/UX Design',
       description: 'User-centered design that combines aesthetics with functionality to create memorable digital experiences.',
       features: ['User Research', 'Wireframing', 'Prototyping', 'Design Systems'],
-      color: 'neon-pink'
+      color: 'neon-pink',
+      available: true
+    },
+    {
+      id: 'mobile-apps',
+      icon: '📱',
+      title: 'Mobile Applications',
+      description: 'Native and cross-platform mobile solutions that deliver exceptional user experiences across all devices.',
+      features: ['React Native', 'iOS & Android', 'App Store Deployment', 'Push Notifications'],
+      color: 'neon-blue',
+      available: false
     },
     {
       id: 'devops',
@@ -48,7 +52,8 @@ export function ServicesSection() {
       title: 'DevOps & Cloud',
       description: 'Scalable infrastructure and deployment solutions that ensure your applications run smoothly at any scale.',
       features: ['CI/CD Pipelines', 'Cloud Architecture', 'Monitoring', 'Security'],
-      color: 'neon-green'
+      color: 'neon-green',
+      available: false
     },
     {
       id: 'consulting',
@@ -56,7 +61,8 @@ export function ServicesSection() {
       title: 'Digital Strategy',
       description: 'Strategic guidance to help your business leverage technology for growth and competitive advantage.',
       features: ['Technology Audit', 'Roadmap Planning', 'Digital Transformation', 'Team Training'],
-      color: 'neon-blue'
+      color: 'neon-blue',
+      available: false
     },
     {
       id: 'ecommerce',
@@ -64,7 +70,8 @@ export function ServicesSection() {
       title: 'E-Commerce Solutions',
       description: 'Complete e-commerce platforms that drive sales and provide seamless shopping experiences.',
       features: ['Custom Storefronts', 'Payment Integration', 'Inventory Management', 'Analytics'],
-      color: 'neon-pink'
+      color: 'neon-pink',
+      available: false
     }
   ]
 
@@ -131,7 +138,7 @@ export function ServicesSection() {
             </h3>
             
             <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-              Let's discuss how our expertise can help you achieve your goals and 
+              Let&apos;s discuss how our expertise can help you achieve your goals and 
               create something extraordinary together.
             </p>
             
@@ -157,7 +164,11 @@ interface ServiceCardProps {
 function ServiceCard({ service, index }: ServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
 
-  const getColorClasses = (color: Service['color']) => {
+  const getColorClasses = (color: Service['color'], available: boolean) => {
+    if (!available) {
+      return 'border-gray-600 bg-gray-800/30'
+    }
+    
     switch (color) {
       case 'neon-green':
         return 'border-neon-green/20 hover:border-neon-green/50 bg-neon-green/5'
@@ -174,24 +185,24 @@ function ServiceCard({ service, index }: ServiceCardProps) {
     <div
       ref={cardRef}
       className={`
-        animate-card group relative p-8 rounded-xl border-2 transition-all duration-500
-        bg-gray-900/50 backdrop-blur-sm hover:bg-gray-800/70
-        ${getColorClasses(service.color)}
-        hover:-translate-y-2 hover:shadow-2xl
+        animate-card relative p-8 rounded-xl border-2 transition-all duration-500
+        bg-gray-900/50 backdrop-blur-sm
+        ${service.available ? 'group hover:bg-gray-800/70 hover:-translate-y-2 hover:shadow-2xl' : 'opacity-60'}
+        ${getColorClasses(service.color, service.available)}
       `}
     >
       {/* Icon */}
-      <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+      <div className={`text-4xl mb-6 transition-transform duration-300 ${service.available ? 'group-hover:scale-110' : ''}`}>
         {service.icon}
       </div>
       
       {/* Title */}
-      <h3 className="hover-lift text-2xl font-bold mb-4 text-white group-hover:text-white transition-colors">
+      <h3 className="text-2xl font-bold mb-4 text-white transition-colors">
         {service.title}
       </h3>
       
       {/* Description */}
-      <p className="hover-lift text-gray-400 mb-6 leading-relaxed">
+      <p className="text-gray-400 mb-6 leading-relaxed">
         {service.description}
       </p>
       
@@ -200,28 +211,47 @@ function ServiceCard({ service, index }: ServiceCardProps) {
         {service.features.map((feature, featureIndex) => (
           <li 
             key={featureIndex}
-            className="hover-lift flex items-center text-sm text-gray-300"
+            className="flex items-center text-sm text-gray-300"
           >
-            <div className={`w-1.5 h-1.5 rounded-full mr-3 bg-${service.color}`} />
+            <div className={`w-1.5 h-1.5 rounded-full mr-3 ${service.available ? `bg-${service.color}` : 'bg-gray-500'}`} />
             {feature}
           </li>
         ))}
       </ul>
       
-      {/* Learn More Link */}
-      <a 
-        href={`#services-${service.id}`}
-        className="hover-lift inline-flex items-center text-sm font-medium text-gray-400 hover:text-white transition-colors group/link"
-      >
-        Learn More
-        <span className="ml-1 transition-transform group-hover/link:translate-x-1">→</span>
-      </a>
+      {/* Learn More Link or Coming Soon */}
+      {service.available ? (
+        <a 
+          href={`#services-${service.id}`}
+          className="inline-flex items-center text-sm font-medium text-gray-400 transition-colors group/link"
+        >
+          Learn More
+          <span className="ml-1 transition-transform group-hover/link:translate-x-1">→</span>
+        </a>
+      ) : (
+        <div className="inline-flex items-center text-sm font-medium text-gray-500">
+          Coming Soon
+          <span className="ml-1">⏳</span>
+        </div>
+      )}
       
-      {/* Decorative Corner Lines */}
-      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        <div className={`w-8 h-px bg-${service.color}`} />
-        <div className={`w-px h-8 bg-${service.color} mt-1`} />
-      </div>
+      {/* Decorative Corner Lines - only for available services */}
+      {service.available && (
+        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className={`w-8 h-px bg-${service.color}`} />
+          <div className={`w-px h-8 bg-${service.color} mt-1`} />
+        </div>
+      )}
+      
+      {/* Coming Soon Overlay */}
+      {!service.available && (
+        <div className="absolute inset-0 bg-black/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
+          <div className="text-center">
+            <div className="text-2xl mb-2">🚧</div>
+            <div className="text-sm font-medium text-gray-300">Coming Soon</div>
+          </div>
+        </div>
+      )}
     </div>
   )
 } 

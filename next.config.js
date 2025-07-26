@@ -10,8 +10,6 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
   },
-  // Enable static optimization
-  output: 'standalone',
   // Compression
   compress: true,
   // Security headers
@@ -48,6 +46,7 @@ const nextConfig = {
   ...(process.env.ANALYZE === 'true' && {
     webpack: (config, { isServer }) => {
       if (!isServer) {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const { BundleAnalyzerPlugin } = require('@next/bundle-analyzer')({
           enabled: true,
         });

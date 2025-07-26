@@ -83,7 +83,7 @@ export function ScrollProgress() {
       aria-valuemax={100}
     >
       <div 
-        className="h-full bg-gradient-to-r from-neon-green to-neon-blue transition-all duration-150 ease-out"
+        className="h-full rounded-r-md bg-gradient-to-r from-neon-green to-neon-blue transition-all duration-150 ease-out"
         style={{ width: `${scrollProgress}%` }}
       />
     </div>

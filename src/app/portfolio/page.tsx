@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import Image from 'next/image';
 import { useSectionAnimation } from '@/components/providers/gsap-provider';
 import { SectionDivider, AnimatedLine, CircuitBackground } from '@/components/animations/animated-lines';
 
@@ -288,7 +287,7 @@ export default function PortfolioPage() {
               Ready to Start Your <span className="text-gradient">Next Project</span>?
             </h2>
             <p className="text-xl text-gray-400 mb-8">
-              Let's discuss how we can help you achieve your goals and create something extraordinary together.
+              Let&apos;s discuss how we can help you achieve your goals and create something extraordinary together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="#contact" className="btn-primary px-8 py-4">
@@ -311,7 +310,7 @@ interface ProjectCardProps {
   onClick: () => void;
 }
 
-function ProjectCard({ project, index, onClick }: ProjectCardProps) {
+function ProjectCard({ project, onClick }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -373,7 +372,7 @@ function ProjectCard({ project, index, onClick }: ProjectCardProps) {
   );
 }
 
-function FeaturedProjectCard({ project, index, onClick }: ProjectCardProps) {
+function FeaturedProjectCard({ project, onClick }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   return (

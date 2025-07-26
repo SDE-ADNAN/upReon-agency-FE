@@ -12,10 +12,6 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ 
   children, 
-  attribute = "class",
-  defaultTheme = "dark",
-  enableSystem = false,
-  disableTransitionOnChange = false 
 }: ThemeProviderProps) {
   React.useEffect(() => {
     // Apply dark theme by default

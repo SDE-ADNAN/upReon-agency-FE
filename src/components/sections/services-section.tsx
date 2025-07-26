@@ -161,7 +161,7 @@ interface ServiceCardProps {
   index: number
 }
 
-function ServiceCard({ service, index }: ServiceCardProps) {
+function ServiceCard({ service }: ServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
 
   const getColorClasses = (color: Service['color'], available: boolean) => {

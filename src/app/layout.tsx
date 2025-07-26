@@ -5,6 +5,9 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 import { GSAPProvider } from '@/components/providers/gsap-provider'
 import { Toaster } from '@/components/ui/toaster'
 import { Analytics } from '@/components/analytics'
+import { Header } from '@/components/layout/header'
+import { Footer } from '@/components/layout/footer'
+import { ScrollProgress } from '@/components/ui/scroll-progress'
 
 // Font configurations
 const inter = Inter({
@@ -142,12 +145,21 @@ export default function RootLayout({ children }: RootLayoutProps) {
           disableTransitionOnChange
         >
           <GSAPProvider>
+            {/* Scroll Progress Indicator */}
+            <ScrollProgress />
+            
+            {/* Header */}
+            <Header />
+            
             {/* Main content */}
             <div className="relative flex min-h-screen flex-col">
               <main className="flex-1">
                 {children}
               </main>
             </div>
+            
+            {/* Footer */}
+            <Footer />
             
             {/* Toast notifications */}
             <Toaster />

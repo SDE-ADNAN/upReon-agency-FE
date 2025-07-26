@@ -6,10 +6,7 @@ import { ProcessSection } from '@/components/sections/process-section'
 import { TeamSection } from '@/components/sections/team-section'
 import { TestimonialsSection } from '@/components/sections/testimonials-section'
 import { ContactSection } from '@/components/sections/contact-section'
-import { Header } from '@/components/layout/header'
-import { Footer } from '@/components/layout/footer'
 import { FloatingElements } from '@/components/animations/floating-elements'
-import { ScrollProgress } from '@/components/ui/scroll-progress'
 
 export const metadata: Metadata = {
   title: 'upReon - Premium Digital Agency | Web Development & Design',
@@ -47,12 +44,6 @@ export default function HomePage() {
       {/* Floating Background Elements */}
       <FloatingElements />
       
-      {/* Scroll Progress Indicator */}
-      <ScrollProgress />
-      
-      {/* Header */}
-      <Header />
-      
       {/* Main Content */}
       <main className="relative z-10">
         {/* Hero Section */}
@@ -76,9 +67,6 @@ export default function HomePage() {
         {/* Contact Section */}
         <ContactSection />
       </main>
-      
-      {/* Footer */}
-      <Footer />
       
       {/* Global Loading Indicator */}
       <div

@@ -20,12 +20,21 @@ export function ServicesSection() {
 
   const services: Service[] = [
     {
+      id: 'staffing',
+      icon: '👥',
+      title: 'Staffing Services',
+      description: 'Comprehensive recruitment solutions that connect businesses with talented professionals who drive performance and innovation.',
+      features: ['Permanent Staffing', 'Remote & Virtual Teams', 'Tech Hiring (IT)', 'Leadership Search'],
+      color: 'neon-green',
+      available: true
+    },
+    {
       id: 'web-dev',
       icon: '⚡',
       title: 'Web Development',
       description: 'Cutting-edge web applications built with modern technologies for optimal performance and scalability.',
       features: ['React & Next.js', 'TypeScript', 'API Integration', 'Performance Optimization'],
-      color: 'neon-green',
+      color: 'neon-blue',
       available: true
     },
     {
@@ -38,40 +47,31 @@ export function ServicesSection() {
       available: true
     },
     {
-      id: 'mobile-apps',
-      icon: '📱',
-      title: 'Mobile Applications',
-      description: 'Native and cross-platform mobile solutions that deliver exceptional user experiences across all devices.',
-      features: ['React Native', 'iOS & Android', 'App Store Deployment', 'Push Notifications'],
-      color: 'neon-blue',
-      available: false
-    },
-    {
-      id: 'devops',
-      icon: '🚀',
-      title: 'DevOps & Cloud',
-      description: 'Scalable infrastructure and deployment solutions that ensure your applications run smoothly at any scale.',
-      features: ['CI/CD Pipelines', 'Cloud Architecture', 'Monitoring', 'Security'],
+      id: 'tech-hiring',
+      icon: '💻',
+      title: 'Tech Hiring',
+      description: 'Specialized recruitment for Java, Python, DevOps, Cloud, Cybersecurity, and emerging technologies.',
+      features: ['Cloud (AWS, Azure, GCP)', 'Full-Stack Development', 'DevOps & ML/AI', 'Data Engineering'],
       color: 'neon-green',
-      available: false
+      available: true
     },
     {
-      id: 'consulting',
-      icon: '💡',
-      title: 'Digital Strategy',
-      description: 'Strategic guidance to help your business leverage technology for growth and competitive advantage.',
-      features: ['Technology Audit', 'Roadmap Planning', 'Digital Transformation', 'Team Training'],
+      id: 'rpo',
+      icon: '🔄',
+      title: 'RPO Solutions',
+      description: 'End-to-end recruitment process outsourcing that handles your entire hiring workflow while you focus on growth.',
+      features: ['Process Optimization', 'Talent Pipeline', 'Cost-Effective Models', 'Scalable Solutions'],
       color: 'neon-blue',
-      available: false
+      available: true
     },
     {
-      id: 'ecommerce',
-      icon: '🛒',
-      title: 'E-Commerce Solutions',
-      description: 'Complete e-commerce platforms that drive sales and provide seamless shopping experiences.',
-      features: ['Custom Storefronts', 'Payment Integration', 'Inventory Management', 'Analytics'],
+      id: 'startup-hiring',
+      icon: '🚀',
+      title: 'Startup Hiring',
+      description: 'Founder-friendly recruitment solutions designed to help startups scale their core team efficiently.',
+      features: ['Cost-Effective Models', 'Fast Turnaround', 'Culture Fit Focus', 'Flexible Solutions'],
       color: 'neon-pink',
-      available: false
+      available: true
     }
   ]
 
@@ -101,9 +101,9 @@ export function ServicesSection() {
               What We <span className="text-gradient">Deliver</span>
             </h2>
             
-            <p className="section-content text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive digital solutions tailored to transform your business and 
-              accelerate your growth through innovative technology and expert craftsmanship.
+            <p className="section-content text-xl text-gray-400 max-w-4xl mx-auto leading-relaxed">
+              Comprehensive staffing and digital solutions tailored to transform your business and 
+              accelerate your growth through smart hiring and innovative technology.
             </p>
           </div>
           
@@ -134,11 +134,11 @@ export function ServicesSection() {
             </div>
             
             <h3 className="text-2xl font-semibold mb-4 text-white">
-              Ready to transform your digital presence?
+              Ready to build your dream team?
             </h3>
             
             <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-              Let&apos;s discuss how our expertise can help you achieve your goals and 
+              Let&apos;s discuss how our expertise can help you find the right talent and 
               create something extraordinary together.
             </p>
             

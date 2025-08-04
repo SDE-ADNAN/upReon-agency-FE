@@ -62,18 +62,28 @@ export function HeroSection() {
           {/* Main Title */}
           <h1 className="hero-title text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-6">
             <span className="block text-gradient">
-              Digital Excellence
+              The Right Fit,
             </span>
             <span className="block text-white mt-2">
-              Redefined
+              Every Time
             </span>
           </h1>
 
           {/* Subtitle */}
-          <p className="hero-subtitle text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            We craft premium digital experiences that transform businesses 
-            and captivate audiences through cutting-edge technology and design innovation.
+          <p className="hero-subtitle text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+            Empowering growth through smart hiring and digital excellence. We connect businesses with 
+            talented professionals who drive performance, innovation, and long-term success.
           </p>
+
+          {/* Taglines */}
+          <div className="mb-8">
+            <p className="text-lg text-neon-green font-medium mb-2">
+              Building Teams That Build Your Business
+            </p>
+            <p className="text-sm text-gray-400">
+              Where Hiring Meets Precision • Hustle Meets Hire • Borderless Hiring, Boundless Potential
+            </p>
+          </div>
 
           {/* CTA Buttons */}
           <div className="hero-cta flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">

@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { HeroSection } from '@/components/sections/hero-section'
 import { ServicesSection } from '@/components/sections/services-section'
+import { StaffingDetailsSection } from '@/components/sections/staffing-details-section'
 import { PortfolioSection } from '@/components/sections/portfolio-section'
 import { ProcessSection } from '@/components/sections/process-section'
 import { TeamSection } from '@/components/sections/team-section'
@@ -9,11 +10,11 @@ import { ContactSection } from '@/components/sections/contact-section'
 import { FloatingElements } from '@/components/animations/floating-elements'
 
 export const metadata: Metadata = {
-  title: 'upReon - Premium Digital Agency | Web Development & Design',
-  description: 'Transform your digital presence with upReon\'s cutting-edge web development, mobile apps, and UI/UX design services. Premium quality, innovative solutions.',
+  title: 'upReon - Smart Hiring & Digital Excellence | Staffing & Web Development',
+  description: 'Empowering growth through smart hiring and digital excellence. Connect with talented professionals and transform your digital presence with upReon\'s comprehensive staffing and development services.',
   openGraph: {
-    title: 'upReon - Premium Digital Agency | Web Development & Design',
-    description: 'Transform your digital presence with cutting-edge digital solutions.',
+    title: 'upReon - Smart Hiring & Digital Excellence | Staffing & Web Development',
+    description: 'Empowering growth through smart hiring and digital excellence. The right fit, every time.',
     url: 'https://upreon.com',
     siteName: 'upReon',
     images: [
@@ -21,15 +22,15 @@ export const metadata: Metadata = {
         url: '/og-home.png',
         width: 1200,
         height: 630,
-        alt: 'upReon - Premium Digital Agency Homepage',
+        alt: 'upReon - Smart Hiring & Digital Excellence',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'upReon - Premium Digital Agency',
-    description: 'Transform your digital presence with cutting-edge solutions.',
+    title: 'upReon - Smart Hiring & Digital Excellence',
+    description: 'Empowering growth through smart hiring and digital excellence.',
     images: ['/og-home.png'],
   },
 }
@@ -51,6 +52,9 @@ export default function HomePage() {
         
         {/* Services Section */}
         <ServicesSection />
+        
+        {/* Staffing Details Section */}
+        <StaffingDetailsSection />
         
         {/* Portfolio Section */}
         <PortfolioSection />
